@@ -1,0 +1,92 @@
+{
+    "spacing": 32,
+    "margin": 2,
+    "modules-center": [
+                       "clock", 
+                       "hyprland/workspaces", 
+                       "pulseaudio", 
+                       "network", 
+                       "battery"
+    ],
+    
+    "clock": {
+       "interval": 60,
+       "format": "{:%H:%M}",
+       "tooltip": false 
+    }, 
+    
+    "hyprland/workspaces": {
+       "format": "{name}",
+       "format-icons": {
+       "1": "1",
+       "2": "2",
+       "3": "3",
+       "4": "4",
+       "5": "5",
+       "active": "",
+       "default": ""
+      },
+     "persistent-workspaces": {
+         "eDP-1": [
+           1,
+           2,
+           3,
+           4,
+           5
+         ]
+    }
+  },
+   "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": " Muted ",
+    "format-icons": {
+        "headphone": "",
+        "headset": "",
+        "phone": "",
+        "phone-muted": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+    },
+    "scrosll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+   "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "{essid:12} {icon}", 
+    "format-icons":[
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤨"
+    ], 
+
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": [
+          "", 
+          "", 
+          "", 
+          "", 
+          ""
+        ],
+        "states": {
+        "warning": 30,
+        "critical": 10
+        }
+    }
+}
+ 
+ 
