@@ -1,92 +1,144 @@
 {
-    "spacing": 32,
-    "margin": 2,
-    "modules-center": [
-                       "clock", 
-                       "hyprland/workspaces", 
-                       "pulseaudio", 
-                       "network", 
-                       "battery"
-    ],
-    
-    "clock": {
-       "interval": 60,
-       "format": "{:%H:%M}",
-       "tooltip": false 
-    }, 
-    
-    "hyprland/workspaces": {
-       "format": "{name}",
-       "format-icons": {
-       "1": "1",
-       "2": "2",
-       "3": "3",
-       "4": "4",
-       "5": "5",
-       "active": "",
-       "default": ""
-      },
-     "persistent-workspaces": {
-         "eDP-1": [
-           1,
-           2,
-           3,
-           4,
-           5
-         ]
-    }
-  },
-   "pulseaudio": {
-    "format": "{volume}% {icon}",
-    "format-bluetooth": "{volume}% {icon}",
-    "format-muted": " Muted ",
-    "format-icons": {
-        "headphone": "",
-        "headset": "",
-        "phone": "",
-        "phone-muted": "",
-        "portable": "",
-        "car": "",
-        "default": ["", ""]
-    },
-    "scrosll-step": 1,
-    "on-click": "pavucontrol",
-    "ignored-sinks": ["Easy Effects Sink"]
-  },
-   "network": {
-    "interface": "wlan0",
-    "format": "{ifname}",
-    "format-wifi": "{essid:12} {icon}", 
-    "format-icons":[
-      "󰤯",
-      "󰤟",
-      "󰤢",
-      "󰤨"
-    ], 
+    "layer": "top",
+    "position": "top",
+    "margin-top": 6,
+    "margin-left": 4,
+    "margin-right": 4,
+    "spacing": 0,
+    "reload_style_on_change": true,
 
-    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-    "format-disconnected": "", //An empty format will hide the module.
-    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-    "tooltip-format-ethernet": "{ifname} ",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50
-  },
+    "modules-left": [
+        "custom/arch",
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "custom/notification",
+        "bluetooth",
+        "network",
+        "pulseaudio",
+        "backlight",
+        "battery",
+        "custom/power"
+    ],
+
+    "custom/arch": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "bash ~/.config/rofi/launcher.sh"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        // "*" pins 1-5 on every monitor, not just the laptop panel
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+
+    "clock": {
+        "interval": 60,
+        "format": "{:%I:%M %p}",
+        "tooltip-format": "{:%A, %d %B %Y}"
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 8
+    },
+
+    "custom/notification": {
+        "format": "{icon}",
+        "format-icons": {
+            "none": "󰂜",
+            "notification": "󱅫",
+            "dnd-none": "󰂛",
+            "dnd-notification": "󰂛",
+            "inhibited-none": "󰂜",
+            "inhibited-notification": "󱅫",
+            "dnd-inhibited-none": "󰂛",
+            "dnd-inhibited-notification": "󰂛"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true,
+        "tooltip": false
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-connected": "󰂱",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "on-click": "blueman-manager"
+    },
+
+    "network": {
+        "format": "{icon}",
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈀",
+        "format-linked": "󰈀",
+        "format-disconnected": "󰤮",
+        "format-icons": [
+            "󰤯",
+            "󰤟",
+            "󰤢",
+            "󰤨"
+        ],
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname} {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "kitty -e nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} <span color='#ebdbb2'>{volume}%</span>",
+        "format-bluetooth": "{icon} <span color='#ebdbb2'>{volume}%</span>",
+        "format-muted": "󰝟 <span color='#ebdbb2'>muted</span>",
+        "format-icons": {
+            "headphone": "󰋋",
+            "headset": "󰋎",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "backlight": {
+        "format": "{icon} <span color='#ebdbb2'>{percent}%</span>",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl -e4 -n2 set 5%+",
+        "on-scroll-down": "brightnessctl -e4 -n2 set 5%-",
+        "tooltip": false
+    },
 
     "battery": {
-        "format": "{capacity}% {icon}",
-        "format-icons": [
-          "", 
-          "", 
-          "", 
-          "", 
-          ""
-        ],
         "states": {
-        "warning": 30,
-        "critical": 10
-        }
+            "critical": 20
+        },
+        "format": "{icon} <span color='#ebdbb2'>{capacity}%</span>",
+        "format-charging": "󰂄 <span color='#ebdbb2'>{capacity}%</span>",
+        "format-plugged": "󰚥 <span color='#ebdbb2'>{capacity}%</span>",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+        "tooltip-format": "{timeTo}"
+    },
+
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "wlogout"
     }
 }
- 
- 
