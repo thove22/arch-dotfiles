@@ -19,6 +19,7 @@
         "custom/notification",
         "bluetooth",
         "network",
+        "custom/netspeed",
         "pulseaudio",
         "backlight",
         "battery",
@@ -101,6 +102,14 @@
         "tooltip-format-ethernet": "{ifname} {ipaddr}/{cidr}",
         "tooltip-format-disconnected": "Disconnected",
         "on-click": "kitty -e nmtui"
+    },
+
+    "custom/netspeed": {
+        "exec": "~/.config/waybar/scripts/netspeed.sh",
+        "return-type": "json",
+        "interval": 2,
+        "format": "{}",
+        "tooltip": true
     },
 
     "pulseaudio": {

@@ -44,6 +44,7 @@ tooltip {
 #custom-notification,
 #bluetooth,
 #network,
+#custom-netspeed,
 #pulseaudio,
 #backlight,
 #battery,
@@ -60,6 +61,7 @@ tooltip {
 #custom-notification:hover,
 #bluetooth:hover,
 #network:hover,
+#custom-netspeed:hover,
 #pulseaudio:hover,
 #backlight:hover,
 #battery:hover,
@@ -151,6 +153,9 @@ tooltip {
 #bluetooth.disabled  { color: @bg3; }
 #network             { color: @blue; }
 #network.disconnected { color: @bg3; }
+/* down/up colours come from the script's markup (@aqua / @orange) */
+#custom-netspeed       { color: @fg-dim; }
+#custom-netspeed.disconnected { color: @bg3; }
 #pulseaudio          { color: @yellow; }
 #pulseaudio.muted    { color: @bg3; }
 #backlight           { color: @orange; }
