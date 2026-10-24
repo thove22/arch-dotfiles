@@ -108,7 +108,8 @@
         "exec": "~/.config/waybar/scripts/netspeed.sh",
         "return-type": "json",
         "interval": 2,
-        "format": "{}",
+        // icon only; the script puts the speeds in the tooltip
+        "format": "󰛳",
         "tooltip": true
     },
 
