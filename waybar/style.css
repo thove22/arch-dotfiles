@@ -153,8 +153,7 @@ tooltip {
 #bluetooth.disabled  { color: @bg3; }
 #network             { color: @blue; }
 #network.disconnected { color: @bg3; }
-/* down/up colours come from the script's markup (@aqua / @orange) */
-#custom-netspeed       { color: @fg-dim; }
+#custom-netspeed      { color: @aqua; }
 #custom-netspeed.disconnected { color: @bg3; }
 #pulseaudio          { color: @yellow; }
 #pulseaudio.muted    { color: @bg3; }
